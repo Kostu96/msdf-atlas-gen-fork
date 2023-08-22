@@ -35,11 +35,6 @@ project(msdf-atlas-gen VERSION ${MSDF_ATLAS_VERSION} LANGUAGES CXX)
 
 add_subdirectory(msdfgen)
 
-find_package(Threads REQUIRED)
-#if(NOT TARGET PNG::PNG)
-#    find_package(PNG REQUIRED)
-#endif()
-
 file(GLOB_RECURSE MSDF_ATLAS_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "msdf-atlas-gen/*.h" "msdf-atlas-gen/*.hpp")
 file(GLOB_RECURSE MSDF_ATLAS_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} "msdf-atlas-gen/*.cpp")
 
@@ -63,7 +58,6 @@ target_compile_definitions(msdf-atlas-gen PUBLIC MSDF_ATLAS_NO_ARTERY_FONT)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT msdf-atlas-gen)
 
 target_compile_features(msdf-atlas-gen PUBLIC cxx_std_11)
-target_link_libraries(msdf-atlas-gen PRIVATE Threads::Threads)# PNG::PNG)
 target_link_libraries(msdf-atlas-gen PUBLIC msdfgen::msdfgen)
 
 if(BUILD_SHARED_LIBS AND WIN32)
